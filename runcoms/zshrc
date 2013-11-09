@@ -5,9 +5,29 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+ZDOTDIR=$HOME
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history node_version time)
+POWERLEVEL9K_NODE_VERSION_FOREGROUND=0
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Customize to your needs...
+. ~/.aliases
+
+if [[ -d "${ZDOTDIR:-$HOME}/.profile.d" ]]; then
+  for i in ${ZDOTDIR:-$HOME}/.profile.d/*.sh; do
+    if [ -r $i ]; then
+      source $i
+    fi
+  done
+  unset i
+fi
+
+setopt printeightbit
+unsetopt correctall
+unsetopt CORRECT
+unsetopt nomatch
+

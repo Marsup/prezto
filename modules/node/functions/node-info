@@ -16,7 +16,7 @@ unset node_info
 typeset -gA node_info
 
 if (( $+functions[nvm_version] )); then
-  version="${$(nvm_version)#v}"
+  version="${$(nvm_version)#v} - $(npm --version)"
 elif (( $+commands[nodenv] )); then
   version="${${$(nodenv version)#v}[(w)0]}"
 elif (( $+commands[node] )) ; then

@@ -9,3 +9,21 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+# Workaround ubuntu bugs (https://bugs.launchpad.net/ubuntu/+source/zsh/+bug/1048212)
+export DEBIAN_PREVENT_KEYBOARD_CHANGES=yes
+
+# Rise history limits
+export HISTSIZE=100000
+export SAVEHIST=100000
+
+# Add current folder node_modules binaries to the PATH
+export PATH=$PATH:node_modules/.bin:~/node_modules/.bin:~/.fasd:/snap/bin
+
+# Exclude common folders from grep
+alias grep="$aliases[grep] --color=auto -I --exclude-from=${HOME}/.grep-exclude --exclude-dir=.git --exclude-dir=.svn --exclude-dir=node_modules"
+
+# Node.js specifics
+export npm_config_loglevel="warn"
+
+export GTK_USE_PORTAL=1
